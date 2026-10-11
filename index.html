@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#252638">
+  <meta name="description" content="Esplora i buoni ricevuti dalle scuole e dalle strutture beneficiarie, comune per comune.">
+  <title>Buoni ricevuti dalle scuole · Coop per la Scuola</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #252638;
+      --paper: #f6f2e9;
+      --surface: #fffdf8;
+      --muted: #686777;
+      --line: #d9d2c5;
+      --yellow: #f4c94f;
+      --coral: #f16f61;
+      --teal: #008c82;
+    }
+    body[data-theme="dark"] {
+      color-scheme: dark;
+      --ink: #edf0f7;
+      --paper: #151923;
+      --surface: #202431;
+      --muted: #aeb5c6;
+      --line: #41485a;
+    }
+    * { box-sizing: border-box; }
+    html { min-width: 320px; background: var(--paper); }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font: 16px/1.5 "Trebuchet MS", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 8% 6%, #f4c94f26 0 110px, transparent 111px),
+        radial-gradient(circle at 95% 20%, #f16f611c 0 150px, transparent 151px),
+        var(--paper);
+      transition: background-color .2s ease, color .2s ease;
+    }
+    .site-header {
+      padding: 24px clamp(16px, 4vw, 56px) 20px;
+      border-bottom: 2px solid var(--ink);
+      background: var(--surface);
+    }
+    body[data-theme="dark"] .site-header { background: #1c202c; }
+    body[data-theme="dark"] .brandmark { box-shadow: 3px 3px 0 #080a10; }
+    body[data-theme="dark"] .dashboard-shell { background: #1c202c; box-shadow: 5px 5px 0 #080a10; }
+    body[data-theme="dark"] .site-footer { color: var(--muted); }
+    body[data-theme="dark"] .footer-inner { border-top-color: var(--line); }
+    .brandline { justify-content: flex-start; }
+    .theme-toggle {
+      margin-left: auto; display: inline-flex; align-items: center; gap: 8px;
+      padding: 9px 12px; border: 2px solid var(--ink); border-radius: 9px;
+      background: var(--yellow); color: #252638; font: inherit; font-size: 12px;
+      font-weight: 900; letter-spacing: 0; text-transform: none; cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .theme-toggle:hover { transform: translate(1px, 1px); box-shadow: 2px 2px 0 var(--ink); }
+    .theme-toggle:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+    @media (max-width: 520px) {
+      .brandline { flex-wrap: wrap; }
+      .theme-toggle { margin-left: auto; }
+    }
+    .header-inner, main, .site-footer { width: min(1440px, 100%); margin-inline: auto; }
+    .brandline {
+      display: flex; align-items: center; gap: 10px;
+      color: var(--ink); font-size: 12px; font-weight: 900;
+      letter-spacing: .1em; text-transform: uppercase;
+    }
+    .brandmark {
+      display: grid; place-items: center; width: 34px; height: 34px;
+      border: 2px solid var(--ink); border-radius: 9px;
+      background: var(--yellow); box-shadow: 3px 3px 0 var(--ink);
+      font-size: 20px; line-height: 1;
+    }
+    .intro { padding: 26px 0 6px; max-width: 760px; }
+    .intro h1 {
+      margin: 0 0 8px; max-width: 700px;
+      font-size: clamp(28px, 5vw, 46px); line-height: 1.06;
+      letter-spacing: -.05em; font-weight: 900;
+    }
+    .intro p { margin: 0; color: var(--muted); font-size: 16px; }
+    .intro .highlight { text-decoration: underline; text-decoration-color: var(--coral); text-decoration-thickness: 4px; text-underline-offset: 4px; }
+    main { padding: 24px clamp(10px, 2vw, 24px) 32px; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin: 0 0 12px; color: var(--muted);
+      font-size: 11px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase;
+    }
+    .section-label::before { content: ""; width: 8px; height: 8px; background: var(--teal); border: 1px solid var(--ink); border-radius: 2px; }
+    .dashboard-shell {
+      padding: clamp(8px, 1.5vw, 16px);
+      border: 2px solid var(--ink); border-radius: 16px;
+      background: #fffdf8; box-shadow: 5px 5px 0 var(--ink);
+    }
+    .site-footer {
+      padding: 18px clamp(16px, 4vw, 56px) 30px;
+      color: var(--muted); font-size: 12px;
+    }
+    .footer-inner { border-top: 1px solid #d9d2c5; padding-top: 14px; display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; }
+    .footer-note { display: flex; align-items: center; gap: 7px; }
+    .footer-note::before { content: "✳"; color: var(--coral); font-size: 16px; }
+    @media (max-width: 600px) {
+      .site-header { padding-top: 16px; }
+      .intro { padding-top: 20px; }
+      .intro p { font-size: 14px; }
+      main { padding-top: 16px; }
+      .dashboard-shell { padding: 5px; box-shadow: 3px 3px 0 var(--ink); }
+    }
+  </style>
+  <script defer src="/coop-buoni-dashboard.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brandline"><span class="brandmark" aria-hidden="true">✳</span> Coop per la Scuola · Esplora i dati <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false"><span id="themeIcon" aria-hidden="true">☾</span><span id="themeLabel">Tema scuro</span></button></div>
+      <div class="intro">
+        <h1>Ogni buono racconta una <span class="highlight">storia di scuola.</span></h1>
+        <p>Cerca le strutture beneficiarie, confronta i punteggi e scopri i dati comune per comune.</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <p class="section-label">La dashboard dei beneficiari</p>
+    <div class="dashboard-shell">
+      <coop-buoni-dashboard></coop-buoni-dashboard>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-note">Dati caricati in tempo reale dall’API Coop per la Scuola.</span>
+      <span>Puoi indicare un comune nell’indirizzo, ad esempio <code>?comune=PRATO</code>.</span>
+    </div>
+  </footer>
+  <script>
+    (() => {
+      const body = document.body;
+      const dashboard = document.querySelector('coop-buoni-dashboard');
+      const button = document.getElementById('themeToggle');
+      const label = document.getElementById('themeLabel');
+      const icon = document.getElementById('themeIcon');
+      let saved = '';
+      try { saved = localStorage.getItem('coop-theme') || ''; } catch (_) {}
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      function setTheme(theme) {
+        const dark = theme === 'dark';
+        body.dataset.theme = dark ? 'dark' : 'light';
+        if (dashboard) dashboard.setAttribute('theme', dark ? 'dark' : 'light');
+        button.setAttribute('aria-pressed', String(dark));
+        label.textContent = dark ? 'Tema chiaro' : 'Tema scuro';
+        icon.textContent = dark ? '☀' : '☾';
+        try { localStorage.setItem('coop-theme', dark ? 'dark' : 'light'); } catch (_) {}
+      }
+      setTheme(saved || (prefersDark ? 'dark' : 'light'));
+      button.addEventListener('click', () => setTheme(body.dataset.theme === 'dark' ? 'light' : 'dark'));
+    })();
+  </script>
+</body>
+</html>
